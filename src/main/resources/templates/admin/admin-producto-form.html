@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title th:text="${pageTitle}">Admin - Formulário</title>
+
+    <link th:href="@{/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link th:href="@{/css/sb-admin-2.min.css}" rel="stylesheet">
+</head>
+
+<body id="page-top">
+
+<div id="wrapper">
+
+    <ul th:replace="~{fragments/_sidebar :: sidebar}"></ul>
+
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <div id="content">
+
+            <nav th:replace="~{fragments/_topbar :: topbar}"></nav>
+
+            <div class="container-fluid">
+
+                <h1 class="h3 mb-4 text-gray-800" th:text="${pageTitle}">Formulário</h1>
+
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Dados do Produto</h6>
+                    </div>
+                    <div class="card-body">
+                        <form th:action="@{/admin/productos/guardar}" th:object="${product}" method="post">
+                            <input type="hidden" th:field="*{id}" />
+
+                            <div class="form-group">
+                                <label for="name">Nome:</label>
+                                <input type="text" class="form-control" id="name" th:field="*{name}" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="description">Descrição:</label>
+                                <textarea class="form-control" id="description" th:field="*{description}" rows="3"></textarea>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="price">Preço:</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">R$</span>
+                                        </div>
+                                        <input type="number" class="form-control" id="price" step="0.01" th:field="*{price}" required>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="imageUrl">URL da Imagem:</label>
+                                    <input type="text" class="form-control" id="imageUrl" th:field="*{imageUrl}">
+                                </div>
+                            </div>
+
+                            <hr>
+                            <div class="text-right">
+                                <a th:href="@{/admin/productos}" class="btn btn-secondary">Cancelar</a>
+                                <button type="submit" class="btn btn-primary">Salvar Produto</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <footer th:replace="~{fragments/_footer :: footer}"></footer>
+
+    </div>
+</div>
+
+<div th:replace="~{fragments/_topbar :: logoutModal}"></div>
+
+<script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/vendor/jquery-easing/jquery.easing.min.js}"></script>
+<script th:src="@{/js/sb-admin-2.min.js}"></script>
+
+</body>
+</html>

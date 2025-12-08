@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Clube Admin - Meu Carrinho</title>
+
+  <link th:href="@{/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+  <link th:href="@{/css/sb-admin-2.min.css}" rel="stylesheet">
+</head>
+
+<body id="page-top">
+
+<div id="wrapper">
+
+  <ul th:replace="~{fragments/_sidebar :: sidebar}"></ul>
+
+  <div id="content-wrapper" class="d-flex flex-column">
+
+    <div id="content">
+
+      <nav th:replace="~{fragments/_topbar :: topbar}"></nav>
+
+      <div class="container-fluid">
+
+        <h1 class="h3 mb-4 text-gray-800">Meu Carrinho de Compras</h1>
+
+        <div class="row mb-3">
+          <div class="col-12">
+            <div th:if="${success}" class="alert alert-success alert-dismissible fade show" role="alert">
+              <i class="fas fa-check-circle mr-2"></i>
+              <span th:text="${success}"></span>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div th:if="${error}" class="alert alert-danger alert-dismissible fade show" role="alert">
+              <i class="fas fa-exclamation-triangle mr-2"></i>
+              <span th:text="${error}"></span>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div th:if="${cart == null || cart.items.empty}" class="card shadow mb-4 border-left-info">
+          <div class="card-body text-center p-5">
+            <div class="text-gray-300 mb-4">
+              <i class="fas fa-shopping-basket fa-5x"></i>
+            </div>
+            <h4 class="font-weight-bold text-info">Seu carrinho está vazio!</h4>
+            <p class="mb-4">Que tal dar uma olhada nos nossos produtos exclusivos?</p>
+            <a th:href="@{/produtos}" class="btn btn-primary btn-icon-split">
+                                <span class="icon text-white-50">
+                                    <i class="fas fa-arrow-left"></i>
+                                </span>
+              <span class="text">Ver Produtos</span>
+            </a>
+          </div>
+        </div>
+
+        <div th:unless="${cart == null || cart.items.empty}" class="card shadow mb-4">
+          <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Itens no Carrinho</h6>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-bordered" width="100%" cellspacing="0">
+                <thead class="thead-light">
+                <tr>
+                  <th>Produto</th>
+                  <th>Preço Unitário</th>
+                  <th>Qtd.</th>
+                  <th>Subtotal</th>
+                  <th class="text-center">Ação</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="item : ${cart.items}">
+                  <td class="align-middle font-weight-bold text-gray-800" th:text="${item.product.name}">Produto</td>
+
+                  <td class="align-middle" th:text="'R$ ' + ${#numbers.formatDecimal(item.product.price, 1, 'POINT', 2, 'COMMA')}">R$ 0,00</td>
+
+                  <td class="align-middle">
+                    <span class="badge badge-secondary p-2" style="font-size: 1em;" th:text="${item.quantity}">1</span>
+                  </td>
+
+                  <td class="align-middle font-weight-bold text-primary"
+                      th:text="'R$ ' + ${#numbers.formatDecimal(item.product.price.doubleValue() * item.quantity, 1, 'POINT', 2, 'COMMA')}">
+                    R$ 0,00
+                  </td>
+
+                  <td class="text-center align-middle">
+                    <form th:action="@{/carrinho/remover/{id}(id=${item.id})}" method="post">
+                      <button type="submit" class="btn btn-danger btn-circle btn-sm" title="Remover">
+                        <i class="fas fa-trash"></i>
+                      </button>
+                    </form>
+                  </td>
+                </tr>
+                </tbody>
+                <tfoot>
+                <tr class="bg-gray-100">
+                  <td colspan="3" class="text-right font-weight-bold text-uppercase pt-3">Total Geral:</td>
+                  <td colspan="2" class="h4 font-weight-bold text-success pt-2"
+                      th:text="'R$ ' + ${#numbers.formatDecimal(cart.getTotal(), 1, 'POINT', 2, 'COMMA')}">
+                    R$ 0,00
+                  </td>
+                </tr>
+                </tfoot>
+              </table>
+            </div>
+
+            <div class="row mt-4">
+              <div class="col-lg-6 mb-2">
+                <a th:href="@{/produtos}" class="btn btn-secondary btn-icon-split w-100 justify-content-start">
+                                        <span class="icon text-white-50">
+                                            <i class="fas fa-arrow-left"></i>
+                                        </span>
+                  <span class="text">Continuar Comprando</span>
+                </a>
+              </div>
+              <div class="col-lg-6 text-right">
+                <form th:action="@{/carrinho/checkout}" method="post">
+                  <button type="submit" class="btn btn-success btn-icon-split w-100 justify-content-start">
+                                            <span class="icon text-white-50">
+                                                <i class="fas fa-check"></i>
+                                            </span>
+                    <span class="text font-weight-bold">Finalizar Compra</span>
+                  </button>
+                </form>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <footer th:replace="~{fragments/_footer :: footer}"></footer>
+
+  </div>
+</div>
+<a class="scroll-to-top rounded" href="#page-top">
+  <i class="fas fa-angle-up"></i>
+</a>
+
+<div th:replace="~{fragments/_topbar :: logoutModal}"></div>
+
+<script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/vendor/jquery-easing/jquery.easing.min.js}"></script>
+<script th:src="@{/js/sb-admin-2.min.js}"></script>
+
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Admin - Produtos</title>
+
+    <link th:href="@{/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link th:href="@{/css/sb-admin-2.min.css}" rel="stylesheet">
+</head>
+
+<body id="page-top">
+
+<div id="wrapper">
+
+    <ul th:replace="~{fragments/_sidebar :: sidebar}"></ul>
+
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <div id="content">
+
+            <nav th:replace="~{fragments/_topbar :: topbar}"></nav>
+
+            <div class="container-fluid">
+
+                <h1 class="h3 mb-2 text-gray-800">Gerenciamento de Produtos</h1>
+                <p class="mb-4">Aqui você pode visualizar, editar ou excluir os produtos da loja.</p>
+
+                <div class="row mb-3">
+                    <div class="col-12">
+                        <div th:if="${success}" class="alert alert-success alert-dismissible fade show" role="alert">
+                            <i class="fas fa-check-circle mr-2"></i><span th:text="${success}"></span>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                        </div>
+                        <div th:if="${error}" class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <i class="fas fa-exclamation-triangle mr-2"></i><span th:text="${error}"></span>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h6 class="m-0 font-weight-bold text-primary">Lista de Produtos</h6>
+                        <a th:href="@{/admin/productos/nuevo}" class="btn btn-primary btn-icon-split btn-sm">
+                                <span class="icon text-white-50">
+                                    <i class="fas fa-plus"></i>
+                                </span>
+                            <span class="text">Novo Produto</span>
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nome</th>
+                                    <th>Preço</th>
+                                    <th class="text-center">Ações</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="prod : ${productos}">
+                                    <td th:text="${prod.id}">1</td>
+                                    <td th:text="${prod.name}">Nome</td>
+                                    <td th:text="'R$ ' + ${#numbers.formatDecimal(prod.price, 1, 'POINT', 2, 'COMMA')}">R$ 0,00</td>
+                                    <td class="text-center">
+                                        <a th:href="@{/admin/productos/editar/{id}(id=${prod.id})}" class="btn btn-warning btn-circle btn-sm" title="Editar">
+                                            <i class="fas fa-pen"></i>
+                                        </a>
+                                        <a th:href="@{/admin/productos/eliminar/{id}(id=${prod.id})}" class="btn btn-danger btn-circle btn-sm"
+                                           onclick="return confirm('Tem certeza que deseja eliminar este produto?');" title="Excluir">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <footer th:replace="~{fragments/_footer :: footer}"></footer>
+
+    </div>
+</div>
+
+<div th:replace="~{fragments/_topbar :: logoutModal}"></div>
+
+<script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/vendor/jquery-easing/jquery.easing.min.js}"></script>
+<script th:src="@{/js/sb-admin-2.min.js}"></script>
+
+</body>
+</html>

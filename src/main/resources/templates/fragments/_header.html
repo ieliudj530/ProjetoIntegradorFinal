@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<div th:fragment="header"
+     class="text-white text-center py-4 shadow mb-4 rounded"
+     th:style="|background: url('@{/imagens/baner.jpg}') no-repeat center; background-size: cover; position: relative;|">
+
+    <div style="background-color: rgba(0,0,0,0.4); position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 0.25rem;"></div>
+
+    <div style="position: relative; z-index: 1;">
+        <h1 class="font-weight-bold" style="font-family: 'Nunito', sans-serif; font-size: 3rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.7);">
+            PetShop
+        </h1>
+        <h4 class="font-weight-light" style="text-shadow: 1px 1px 3px rgba(0,0,0,0.7);">
+            Cachorrinho Feliz
+        </h4>
+    </div>
+</div>
+
+</body>
+</html>

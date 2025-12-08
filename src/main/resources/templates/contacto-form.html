@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Clube Admin - Contato</title>
+
+    <link th:href="@{/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link th:href="@{/css/sb-admin-2.min.css}" rel="stylesheet">
+</head>
+
+<body id="page-top">
+
+<div id="wrapper">
+
+    <ul th:replace="~{fragments/_sidebar :: sidebar}"></ul>
+
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <div id="content">
+
+            <nav th:replace="~{fragments/_topbar :: topbar}"></nav>
+
+            <div class="container-fluid">
+
+                <h1 class="h3 mb-4 text-gray-800">Entre em Contato</h1>
+
+                <div class="row mb-3">
+                    <div class="col-12">
+                        <div th:if="${success}" class="alert alert-success alert-dismissible fade show" role="alert">
+                            <i class="fas fa-check-circle mr-2"></i>
+                            <span th:text="${success}"></span>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div th:if="${error}" class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <i class="fas fa-exclamation-triangle mr-2"></i>
+                            <span th:text="${error}"></span>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+
+                    <div class="col-lg-6">
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">Envie uma Mensagem</h6>
+                            </div>
+                            <div class="card-body">
+                                <p class="mb-4 small">Como você já está logado, sabemos quem você é. Basta escrever sua mensagem!</p>
+
+                                <form th:action="@{/contacto}" method="post">
+                                    <div class="form-group">
+                                        <label for="mensagem" class="font-weight-bold text-gray-800">Mensagem:</label>
+                                        <textarea class="form-control" id="mensagem" name="message" rows="6"
+                                                  placeholder="Escreva sua mensagem aqui..." required></textarea>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary btn-block btn-icon-split justify-content-center">
+                                            <span class="icon text-white-50">
+                                                <i class="fas fa-paper-plane"></i>
+                                            </span>
+                                        <span class="text">Enviar Mensagem</span>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">Informações de Contato</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="mb-4">
+                                    <p class="mb-2">
+                                        <span class="icon text-primary mr-2"><i class="fas fa-phone-alt"></i></span>
+                                        <strong>Telefone:</strong> (49) 99183-9170
+                                    </p>
+                                    <p class="mb-2">
+                                        <span class="icon text-primary mr-2"><i class="fas fa-envelope"></i></span>
+                                        <strong>Email:</strong> contato@clubeadmin.com
+                                    </p>
+                                    <p class="mb-2">
+                                        <span class="icon text-primary mr-2"><i class="fas fa-map-marker-alt"></i></span>
+                                        <strong>Endereço:</strong> Rua Principal, 123 - Centro, Xanxerê, SC
+                                    </p>
+                                </div>
+
+                                <hr>
+
+                                <h6 class="font-weight-bold text-gray-800 mb-3">Nos Encontre</h6>
+                                <div class="embed-responsive embed-responsive-16by9" style="border-radius: 0.35rem; overflow: hidden;">
+                                    <iframe class="embed-responsive-item"
+                                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d28383.18181298418!2d-52.41842802099351!3d-26.8770877983633!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94e4a1a302a7c58d%3A0x6a2c0f2f35d1f899!2sXanxer%C3%AA%2C%20SC!5e0!3m2!1spt-BR!2sbr!4v1668615392686!5m2!1spt-BR!2sbr"
+                                            style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+        <footer th:replace="~{fragments/_footer :: footer}"></footer>
+
+    </div>
+</div>
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+
+<div th:replace="~{fragments/_topbar :: logoutModal}"></div>
+
+<script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/vendor/jquery-easing/jquery.easing.min.js}"></script>
+<script th:src="@{/js/sb-admin-2.min.js}"></script>
+
+</body>
+</html>

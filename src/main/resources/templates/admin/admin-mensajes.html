@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Admin - Mensagens</title>
+
+  <link th:href="@{/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+  <link th:href="@{/css/sb-admin-2.min.css}" rel="stylesheet">
+</head>
+
+<body id="page-top">
+
+<div id="wrapper">
+
+  <ul th:replace="~{fragments/_sidebar :: sidebar}"></ul>
+
+  <div id="content-wrapper" class="d-flex flex-column">
+
+    <div id="content">
+
+      <nav th:replace="~{fragments/_topbar :: topbar}"></nav>
+
+      <div class="container-fluid">
+
+        <h1 class="h3 mb-4 text-gray-800">Mensagens de Contato</h1>
+
+        <div class="card shadow mb-4">
+          <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Caixa de Entrada</h6>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-bordered" width="100%" cellspacing="0">
+                <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Data</th>
+                  <th>Usuário (Email)</th>
+                  <th>Mensagem</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="msg : ${mensajes}">
+                  <td th:text="${msg.id}">1</td>
+                  <td th:text="${#temporals.format(msg.createdAt, 'dd/MM/yyyy HH:mm')}">Data</td>
+                  <td th:text="${msg.user?.email}">email</td>
+                  <td th:text="${msg.message}">msg</td>
+                </tr>
+                <tr th:if="${mensajes.empty}">
+                  <td colspan="4" class="text-center">Nenhuma mensagem encontrada.</td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <footer th:replace="~{fragments/_footer :: footer}"></footer>
+
+  </div>
+</div>
+
+<div th:replace="~{fragments/_topbar :: logoutModal}"></div>
+
+<script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/vendor/jquery-easing/jquery.easing.min.js}"></script>
+<script th:src="@{/js/sb-admin-2.min.js}"></script>
+
+</body>
+</html>

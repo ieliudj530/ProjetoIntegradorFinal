@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Clube Admin - Sucesso!</title>
+
+    <link th:href="@{/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link th:href="@{/css/sb-admin-2.min.css}" rel="stylesheet">
+</head>
+
+<body id="page-top">
+
+<div id="wrapper">
+
+    <ul th:replace="~{fragments/_sidebar :: sidebar}"></ul>
+
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <div id="content">
+
+            <nav th:replace="~{fragments/_topbar :: topbar}"></nav>
+
+            <div class="container-fluid">
+
+                <div class="text-center mt-5">
+                    <div class="mb-4">
+                        <i class="fas fa-check-circle text-success fa-5x"></i>
+                    </div>
+                    <h1 class="h3 mb-2 text-gray-800 font-weight-bold">Obrigado pela sua compra! 🥳</h1>
+
+                    <div th:if="${success}" class="alert alert-success d-inline-block my-3">
+                        <span th:text="${success}"></span>
+                    </div>
+
+                    <p class="mb-4 lead text-gray-600">Seu pedido foi processado e está sendo preparado para envio.</p>
+
+                    <div class="mt-4">
+                        <a th:href="@{/produtos}" class="btn btn-primary btn-icon-split btn-lg mr-2">
+                                <span class="icon text-white-50">
+                                    <i class="fas fa-shopping-bag"></i>
+                                </span>
+                            <span class="text">Ver mais produtos</span>
+                        </a>
+                        <a th:href="@{/home}" class="btn btn-secondary btn-icon-split btn-lg">
+                                <span class="icon text-white-50">
+                                    <i class="fas fa-home"></i>
+                                </span>
+                            <span class="text">Ir para Home</span>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <footer th:replace="~{fragments/_footer :: footer}"></footer>
+
+    </div>
+</div>
+
+<div th:replace="~{fragments/_topbar :: logoutModal}"></div>
+
+<script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/vendor/jquery-easing/jquery.easing.min.js}"></script>
+<script th:src="@{/js/sb-admin-2.min.js}"></script>
+
+</body>
+</html>
